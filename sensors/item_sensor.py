@@ -45,7 +45,10 @@ class ItemSensor(PollingSensor):
         if not stored_date:
             stored_date = datetime.now()
         start_date = self._timezone.localize(EWSDateTime.from_datetime(stored_date))
-        target = self.account.root.get_folder_by_name(self.sensor_folder)
+        if self.sensor_folder.lower() == 'inbox':
+            target = self.account.inbox
+        else:
+            target = self.account.inbox.parent / self.sensor_folder
         items = target.filter(is_read=False).filter(datetime_received__gt=start_date)
 
         self._logger.info("Found {0} items".format(items.count()))
