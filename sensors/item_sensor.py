@@ -9,6 +9,7 @@ class ItemSensor(PollingSensor):
     def __init__(self, sensor_service, config):
         super(ItemSensor, self).__init__(sensor_service=sensor_service,
                                          config=config)
+        self._trigger_ref = 'msexchange.exchange_new_item'
         self._logger = self.sensor_service.get_logger(
             name=self.__class__.__name__)
         self._stop = False
@@ -46,6 +47,7 @@ class ItemSensor(PollingSensor):
                 EWSDateTime.from_datetime(datetime.now()))
 
     def poll(self):
+        trigger = self._trigger_ref
         start_date = self._get_last_date()
         if not start_date:
             start_date = self.stored_date
@@ -59,7 +61,7 @@ class ItemSensor(PollingSensor):
         self._logger.info("Found {0} items".format(items.count()))
         for item in items:
             payload = dict(
-                item_id=item.item_id,
+                id=item.id,
                 subject=item.subject,
                 body=item.body,
                 text_body=item.text_body,
@@ -67,8 +69,7 @@ class ItemSensor(PollingSensor):
             )
             self._logger.info(
                 "Sending trigger for item '{0}'.".format(payload['subject']))
-            self._sensor_service.dispatch(trigger='exchange_new_item',
-                                          payload=payload)
+            self._sensor_service.dispatch(trigger=trigger, payload=payload)
             self._set_last_date(payload['datetime_received'])
 
     def cleanup(self):
