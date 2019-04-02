@@ -57,8 +57,14 @@ class ItemSensor(PollingSensor):
             datetime_received__gt=start_date)
 
         self._logger.info("Found {0} items".format(items.count()))
-        for payload in items.values('item_id', 'subject', 'body', 'text_body',
-                                    'datetime_received'):
+        for item in items:
+            payload = dict(
+                item_id=item.item_id,
+                subject=item.subject,
+                body=item.body,
+                text_body=item.text_body,
+                datetime_received=item.datetime_received.ewsformat(),
+            )
             self._logger.info(
                 "Sending trigger for item '{0}'.".format(payload['subject']))
             self._sensor_service.dispatch(trigger='exchange_new_item',
@@ -90,6 +96,6 @@ class ItemSensor(PollingSensor):
         return EWSDateTime.from_string(self._last_date)
 
     def _set_last_date(self, last_date):
-        self._last_date = last_date.ewsformat()
+        self._last_date = last_date
         self._sensor_service.set_value(name=self._store_key,
                                        value=self._last_date)
