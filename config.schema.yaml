@@ -31,4 +31,4 @@
     default: "Inbox"
     type: string
     description: "Folder to monitor in the sensor"
-    required: true
+    required: false
