@@ -1,21 +1,21 @@
 ---
-class_name: "ItemSensor"
-entry_point: "item_sensor.py"
-description: "Sensor that detects items."
-polling_interval: 60
+class_name: ItemSensor
+entry_point: item_sensor.py
+description: Sensor that detects items.
+poll_interval: 30
 trigger_types:
-  - name: "exchange_new_item"
-    description: "New item in folder"
+  - name: exchange_new_item
+    description: New item in folder
     payload_schema:
-      type: "object"
+      type: object
       properties:
-        id:
-          type: "string"
+        item_id:
+          type: string
         subject:
-          type: "string"
+          type: string
         body:
-          type: "string"
+          type: string
         text_body:
-          type: "string"
+          type: string
         datetime_received:
-          type: "string"
+          type: string

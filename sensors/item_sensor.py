@@ -6,9 +6,10 @@ from st2reactor.sensor.base import PollingSensor
 
 
 class ItemSensor(PollingSensor):
-    def __init__(self, sensor_service, config):
+    def __init__(self, sensor_service, config, poll_interval=30):
         super(ItemSensor, self).__init__(sensor_service=sensor_service,
-                                         config=config)
+                                         config=config,
+                                         poll_interval=poll_interval)
         self._trigger_ref = 'msexchange.exchange_new_item'
         self._logger = self.sensor_service.get_logger(
             name=self.__class__.__name__)
