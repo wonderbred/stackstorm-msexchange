@@ -1,0 +1,27 @@
+---
+name: move_items
+pack: msexchange
+runner_type: python-script
+description: Move items from one folder to another
+enabled: true
+entry_point: move_items.py
+parameters:
+    item_ids:
+        type: array
+        description: List of item IDs
+        required: true
+    from_folder:
+        type: string
+        description: Folder to move items from
+        default: "Inbox"
+        required: true
+    to_folder:
+        type: string
+        description: Folder to move items to
+        default: "Processed"
+        required: true
+    mark_read:
+        type: boolean
+        description: Mark moved items read
+        default: true
+        required: false
