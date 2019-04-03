@@ -1,4 +1,4 @@
-from base.action import BaseExchangeAction
+from lib.action import BaseExchangeAction
 from exchangelib import EWSDateTime
 
 

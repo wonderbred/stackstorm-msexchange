@@ -1,5 +1,5 @@
-from base.action import BaseExchangeAction
-from base import folder_to_dict
+from lib.action import BaseExchangeAction
+from lib.utils import folder_to_dict
 
 
 class GetFolderAction(BaseExchangeAction):

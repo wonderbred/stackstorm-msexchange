@@ -5,7 +5,6 @@ from st2common.runners.base_action import Action
 from st2client.client import Client
 from st2client.models import KeyValuePair
 from exchangelib import Account, ServiceAccount, Configuration, DELEGATE, EWSTimeZone
-from exchangelib.errors import ErrorFolderNotFound
 
 CacheEntry = namedtuple('CacheEntry', 'ews_url ews_auth_type primary_smtp_address')
 
@@ -54,7 +53,10 @@ class BaseExchangeAction(Action):
                     autodiscover=False,
                     access_type=DELEGATE)
             self._store_cache_configuration()
-        self.ErrorFolderNotFound = ErrorFolderNotFound
+
+    def mark_item_read(self, item):
+        item.is_read = True
+        item.save(update_fields=['is_read'])
 
     def _store_cache_configuration(self):
         ews_url = self.account.protocol.service_endpoint

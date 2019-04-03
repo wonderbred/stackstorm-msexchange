@@ -1,12 +1,12 @@
-from base.action import BaseExchangeAction
-from base import item_to_dict
+from lib.action import BaseExchangeAction
+from lib.utils import item_to_dict
 
 
 class SearchItemsAction(BaseExchangeAction):
     def run(self, folder, include_body, unread_only, subject=None):
         q = self.account.inbox.parent / folder
         if subject:
-            q = q.filter(subject__contains=subject)
+            q = q.filter(subject__icontains=subject)
         if unread_only:
             q = q.filter(is_read=False)
         items = q.all()

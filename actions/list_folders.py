@@ -1,5 +1,7 @@
-from base.action import BaseExchangeAction
-from base import folder_to_dict
+from exchangelib.errors import ErrorFolderNotFound
+
+from lib.action import BaseExchangeAction
+from lib.utils import folder_to_dict
 
 
 class ListFoldersAction(BaseExchangeAction):
@@ -7,7 +9,7 @@ class ListFoldersAction(BaseExchangeAction):
         if root is not None:
             try:
                 folders = (self.account.inbox.parent / root).children
-            except self.ErrorFolderNotFound:
+            except ErrorFolderNotFound:
                 self.logger.error('Root folder not found: {}'.format(root))
                 return False
         else:
