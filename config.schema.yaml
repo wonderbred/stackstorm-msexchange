@@ -17,11 +17,6 @@
     description: "Optional server hostname, for when autodiscover is not available"
     type: "string"
     required: false
-  verify_ssl:
-    description: "Verify endpoint SSL details"
-    type: "boolean"
-    default: true
-    required: true
   timezone:
     description: "Timezone of user"
     type: "string"
