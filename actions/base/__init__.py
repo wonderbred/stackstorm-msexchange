@@ -14,6 +14,7 @@ def item_to_dict(item, include_body=False):
         'id': item.item_id,
         'changekeyid': item.changekey,
         'subject': item.subject,
+        'is_read': item.is_read,
         'sensitivity': item.sensitivity,
         'text_body': item.text_body,
         'body': item.body,
