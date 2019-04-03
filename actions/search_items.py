@@ -4,7 +4,7 @@ from base import item_to_dict
 
 class SearchItemsAction(BaseExchangeAction):
     def run(self, folder, include_body, subject=None):
-        folder = self.account.inbox.parent / self.folder
+        folder = self.account.inbox.parent / folder
         if subject:
             items = folder.filter(subject__contains=subject)
         else:
