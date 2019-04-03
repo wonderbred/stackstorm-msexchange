@@ -7,6 +7,6 @@ class ListFoldersAction(BaseExchangeAction):
         if root:
             folders = self.account.root.glob('*/{}'.format(root)).folders
         else:
-            folders = self.account.root.children.folders
+            folders = self.account.inbox.parent.children.folders
 
         return [folder_to_dict(folder) for folder in folders]
