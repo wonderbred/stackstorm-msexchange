@@ -1,0 +1,17 @@
+---
+name: get_item
+pack: msexchange
+runner_type: python-script
+description: Get Exchange item
+enabled: true
+entry_point: get_item.py
+parameters:
+    item_id:
+        type: string
+        description: Item ID
+        required: true
+    folder:
+        type: string
+        description: Folder the item is located in
+        default: "Inbox"
+        required: true
