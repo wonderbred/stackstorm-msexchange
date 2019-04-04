@@ -14,7 +14,7 @@ class MoveItemsAction(BaseExchangeAction):
                 assert type(item) != ErrorItemNotFound
                 self.logger.debug('Item found')
             except AssertionError:
-                return (False, 'Item(id="{}") not found'.format(item_id))
+                return False, 'Item(id="{}") not found'.format(item_id)
             if mark_read:
                 self.mark_item_read(item)
                 self.logger.debug('Item(id="{}") marked read'.format(item_id))

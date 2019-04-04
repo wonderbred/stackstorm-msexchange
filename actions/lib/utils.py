@@ -9,7 +9,7 @@ def folder_to_dict(folder):
     }
 
 
-def item_to_dict(item, include_body=False):
+def item_to_dict(item, include_body=False, include_text_body=False):
     result = {
         'id': item.item_id,
         'changekeyid': item.changekey,
@@ -36,5 +36,6 @@ def item_to_dict(item, include_body=False):
     }
     if not include_body:
         del result['body']
+    if not include_text_body:
         del result['text_body']
     return result

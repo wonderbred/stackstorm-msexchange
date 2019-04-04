@@ -24,3 +24,8 @@ parameters:
         description: Include the body of the message in the responses
         default: true
         required: false
+    include_text_body:
+        type: boolean
+        description: Include the text_body of the message in the responses
+        default: true
+        required: false
